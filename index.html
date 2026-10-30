@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Princess Saves Mario</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas" width="816" height="480"></canvas>
+        <div id="gesture-overlay">
+            <div class="gesture-header">
+                <span>🖐️ GESTURE VISION HUD</span>
+                <button id="gesture-close-btn" title="Close Gesture HUD">&times;</button>
+            </div>
+            <div class="gesture-viewport">
+                <video id="gesture-video" autoplay playsinline muted></video>
+                <canvas id="gesture-canvas"></canvas>
+                <div id="gesture-guide">
+                    <div class="gesture-zone" id="green-zone">STOP ZONE</div>
+                    <div class="gesture-line" id="cyan-line">👉 R-HAND: POINT=MOVE | 👌 PINCH=JUMP</div>
+                </div>
+            </div>
+            <div class="gesture-instructions">
+                <div class="g-item" id="gi-steer">👉 R-HAND POINT: STEER L/R</div>
+                <div class="g-item" id="gi-jump">👌 R-HAND PINCH/FLICK: JUMP & FLOAT</div>
+                <div class="g-item" id="gi-punch">👊 L-HAND FIST: ATTACK PUNCH</div>
+                <div class="g-item" id="gi-blast">✋ L-HAND OPEN: HEART BLAST</div>
+                <div class="g-item" id="gi-interact">🤝 BOTH HANDS: RESCUE MARIO</div>
+            </div>
+            <div id="gesture-notice" class="gesture-status-banner">
+                TIP: On Chrome/Safari, run via local server (http://localhost:8000) for webcam permission.
+            </div>
+        </div>
+        <div id="loading-screen">
+            <div class="loading-content">
+                <h1>👑 Princess Saves Mario</h1>
+                <div class="loading-bar-container">
+                    <div class="loading-bar" id="loading-bar"></div>
+                </div>
+                <p id="loading-text">Generating pixel art...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MediaPipe Hands for Real-time AI Gesture Tracking -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+
+    <!-- Game Scripts (load order matters) -->
+    <script src="js/constants.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/assets.js"></script>
+    <script src="js/input.js"></script>
+    <script src="js/camera.js"></script>
+    <script src="js/physics.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/enemies.js"></script>
+    <script src="js/projectiles.js"></script>
+    <script src="js/items.js"></script>
+    <script src="js/level.js"></script>
+    <script src="js/hud.js"></script>
+    <script src="js/puzzles.js"></script>
+    <script src="js/screens.js"></script>
+    <script src="js/engine.js"></script>
+    <script src="js/gestures.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

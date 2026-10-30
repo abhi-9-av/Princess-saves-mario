@@ -1,0 +1,272 @@
+/* ============================================================================
+   PRINCESS SAVES MARIO — Stylesheet
+   ============================================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #1a1a2e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Press Start 2P', monospace;
+    overflow: hidden;
+}
+
+#game-container {
+    position: relative;
+    width: 816px;
+    height: 480px;
+    border: 4px solid #ffd700;
+    border-radius: 8px;
+    box-shadow:
+        0 0 20px rgba(255, 215, 0, 0.3),
+        0 0 60px rgba(255, 105, 180, 0.2),
+        inset 0 0 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+#game-canvas {
+    display: block;
+    width: 816px;
+    height: 480px;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background: #5c94fc;
+    cursor: pointer;
+}
+
+/* Gesture Overlay */
+#gesture-overlay {
+    position: absolute;
+    top: 0;
+    right: -325px;
+    width: 320px;
+    height: 480px;
+    background: rgba(14, 6, 28, 0.96);
+    border-left: 2px solid #ffd700;
+    z-index: 50;
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+#gesture-overlay.active {
+    right: 0;
+}
+
+.gesture-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: #1a0a2e;
+    color: #ffd700;
+    font-size: 8px;
+    border-bottom: 1px solid #ffd700;
+    letter-spacing: 0.5px;
+}
+
+#gesture-close-btn {
+    background: none;
+    border: none;
+    color: #ff69b4;
+    font-size: 18px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.gesture-viewport {
+    position: relative;
+    width: 320px;
+    height: 220px;
+    background: #000;
+    overflow: hidden;
+}
+
+#gesture-video {
+    width: 320px;
+    height: 220px;
+    object-fit: cover;
+    transform: scaleX(-1);
+    opacity: 0.7;
+}
+
+#gesture-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 320px;
+    height: 220px;
+}
+
+#gesture-guide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 320px;
+    height: 220px;
+    pointer-events: none;
+}
+
+.gesture-zone {
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    width: 90px;
+    height: 80px;
+    border: 2px dashed #30ff30;
+    color: #30ff30;
+    font-size: 7px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.85;
+    background: rgba(48, 255, 48, 0.08);
+    box-shadow: 0 0 10px rgba(48, 255, 48, 0.2);
+}
+
+.gesture-line {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    top: 8px;
+    height: 18px;
+    background: rgba(0, 255, 255, 0.18);
+    border: 1px solid #00ffff;
+    border-radius: 3px;
+    color: #00ffff;
+    font-size: 7px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 18px;
+    opacity: 0.9;
+    box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+}
+
+.gesture-instructions {
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 7px;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.5);
+    border-top: 1px solid #4a1d6d;
+    flex: 1;
+}
+
+.g-item {
+    padding: 4px 6px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.05);
+    transition: background 0.15s, color 0.15s;
+}
+
+.g-item.active {
+    background: #00ffcc;
+    color: #000000;
+    font-weight: bold;
+}
+
+.gesture-status-banner {
+    padding: 6px 10px;
+    background: rgba(255, 215, 0, 0.1);
+    border-top: 1px solid #ffd700;
+    color: #ffec70;
+    font-size: 6px;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Loading Screen */
+#loading-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #1a0a2e 0%, #2d1b4e 50%, #1a0a2e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: opacity 0.5s ease;
+}
+
+#loading-screen.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-content {
+    text-align: center;
+    color: #ffd700;
+}
+
+.loading-content h1 {
+    font-size: 18px;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 0 #ff69b4;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.loading-bar-container {
+    width: 300px;
+    height: 16px;
+    background: #2d1b4e;
+    border: 2px solid #ffd700;
+    border-radius: 4px;
+    margin: 0 auto 15px;
+    overflow: hidden;
+}
+
+.loading-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #ff69b4, #ffd700, #ff69b4);
+    background-size: 200% 100%;
+    animation: shimmer 1s linear infinite;
+    transition: width 0.3s ease;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+#loading-text {
+    font-size: 8px;
+    color: #ff69b4;
+}
+
+/* Responsive */
+@media (max-width: 850px) {
+    #game-container {
+        width: 100vw;
+        height: calc(100vw * 480 / 816);
+        border-width: 2px;
+        border-radius: 0;
+    }
+    #game-canvas {
+        width: 100%;
+        height: 100%;
+    }
+}
